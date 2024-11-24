@@ -14,10 +14,10 @@ import java.io.IOException;
 import java.util.Map;
 
 
-@Command(name = "gendiff",
+@ Command(name = "gendiff",
         mixinStandardHelpOptions = true,
         version = "gendiff 1.0",
-        description = "Compares two configuration files and shows a difference.")
+                description = "Compares two configuration files and shows a difference.")
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.*/
@@ -31,20 +31,24 @@ public class App{
     @Option(names = { "-f", "--format" }, defaultValue = "stylish", paramLabel = "format",
             description = "output format [default: ${DEFAULT-VALUE}]")
     private String format;
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
-    }
-    /*public static void main(String[] args) throws JsonProcessingException {
-        String jsonLoadRun = json1Load("C:\\file1.json");
-        //System.out.println(jsonLoadRun);
-        Map<String, Object> mapJson = parsJson(jsonLoadRun);
-        String jsonLoadRun2 = json1Load("C:\\file2.json");
-        //System.out.println(jsonLoadRun2);
-        Map<String, Object> mapJson2 = parsJson(jsonLoadRun2);
-        System.out.println(Differ.generate(mapJson, mapJson2));
     }*/
-    public static String json1Load(String file1){
+    public static void main(String[] args) throws JsonProcessingException {
+        String jsonLoadRun = fileLoad("C:\\file1.json");
+        Map<String, Object> mapJson = Pars.parsJson(jsonLoadRun);
+        String jsonLoadRun2 = fileLoad("C:\\file2.json");
+        Map<String, Object> mapJson2 = Pars.parsJson(jsonLoadRun2);
+        System.out.println(Differ.generate(mapJson, mapJson2));
+
+        String jsonYamlRun = fileLoad("C:\\filepath1.yaml");
+        Map<String, Object> mapYaml = Pars.parsYaml(jsonYamlRun);
+        String jsonYamlRun2 = fileLoad("C:\\filepath2.yaml");
+        Map<String, Object> mapYaml2 = Pars.parsYaml(jsonYamlRun2);
+        System.out.println(Differ.generate(mapYaml, mapYaml2));
+    }
+    public static String fileLoad(String file1){
         try (BufferedReader str = new BufferedReader(new FileReader(file1))){
             String line;
             StringBuilder builder = new StringBuilder();
@@ -57,10 +61,5 @@ public class App{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-    public static Map<String, Object> parsJson(String json) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String,Object> map = objectMapper.readValue(json, Map.class);
-        return map;
     }
 }
