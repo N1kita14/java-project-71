@@ -12,7 +12,7 @@ public class Differ {
         Map<String, Object> file12 = new TreeMap<>();
         for(String key: diffFile2.keySet()){
             if(diffFile1.containsKey(key)){
-                if(diffFile1.get(key).equals(diffFile2.get(key))){
+                if(diffFile1.get(key) != null && diffFile2.get(key) != null && diffFile1.get(key).equals(diffFile2.get(key))){
                     file12.put(key, diffFile1.get(key));
                 }else{
                     file12.put("- " + key, diffFile1.get(key));
