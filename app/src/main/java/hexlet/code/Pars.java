@@ -8,14 +8,16 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Pars {
-    public static Map<String, Object> parsJson(String json) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String,Object> map = objectMapper.readValue(json, Map.class);
-        return map;
-    }
-    public static Map<String, Object> parsYaml(String yaml) throws JsonProcessingException {
-        ObjectMapper objectMapperYaml = new ObjectMapper(new YAMLFactory());
-        Map<String, Object> mapYaml = objectMapperYaml.readValue(yaml, Map.class);
-        return mapYaml;
+    public static Map<String, Object> pars(String text, String type) throws JsonProcessingException {
+        if(type.equals("json")){
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String,Object> map = objectMapper.readValue(text, Map.class);
+            return map;
+        } else if (type.equals("yaml")) {
+            ObjectMapper objectMapperYaml = new ObjectMapper(new YAMLFactory());
+            Map<String, Object> mapYaml = objectMapperYaml.readValue(text, Map.class);
+            return mapYaml;
+        }
+        return null;
     }
 }

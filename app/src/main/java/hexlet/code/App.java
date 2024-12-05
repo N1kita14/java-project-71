@@ -22,20 +22,20 @@ import java.util.Map;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.*/
 public class App{
-    @Parameters(paramLabel = "file1", description = "path to first file")
+    @Parameters(paramLabel = "filepath1", description = "path to first file")
     private String filePath1;
 
-    @Parameters(paramLabel = "file2", description = "path to second file")
+    @Parameters(paramLabel = "filepath2", description = "path to second file")
     private String filePath2;
 
     @Option(names = { "-f", "--format" }, defaultValue = "stylish", paramLabel = "format",
             description = "output format [default: ${DEFAULT-VALUE}]")
     private String format;
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
-    }
-    /*public static void main(String[] args) throws JsonProcessingException {
+    }*/
+    public static void main(String[] args) throws JsonProcessingException {
         String jsonLoadRun = fileLoad("C:\\file11.json");
         Map<String, Object> mapJson = Pars.parsJson(jsonLoadRun);
         String jsonLoadRun2 = fileLoad("C:\\file22.json");
@@ -47,19 +47,5 @@ public class App{
         String jsonYamlRun2 = fileLoad("C:\\filepath2.yaml");
         Map<String, Object> mapYaml2 = Pars.parsYaml(jsonYamlRun2);
         System.out.println(Differ.generate(mapYaml, mapYaml2));
-    }*/
-    public static String fileLoad(String file1){
-        try (BufferedReader str = new BufferedReader(new FileReader(file1))){
-            String line;
-            StringBuilder builder = new StringBuilder();
-            while ((line = str.readLine()) != null) {
-                builder.append(line + "\n");
-            }
-            return builder.toString();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

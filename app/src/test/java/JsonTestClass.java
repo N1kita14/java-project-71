@@ -31,13 +31,13 @@ public class JsonTestClass {
     }
     @Test
     void testFileYaml(){
-        String testFile1Yaml = "host: hexlet.io\n" +
+        String testFile1Yaml = "host: hexlet.io" +
                 "timeout: 50\n" +
                 "proxy: 123.234.53.22\n" +
                 "follow: false";
         String testFile2Yaml = "timeout: 20\n" +
                 "verbose: true\n" +
-                "host: hexlet.io";
+                "host: hexlet.io\n";
         try {
             String testYaml = Differ.generate(Pars.parsYaml(testFile1Yaml), Pars.parsYaml(testFile2Yaml));
             String resultYaml = "{\"+ timeout\":20,\"+ verbose\":true,\"- follow\":false,\"- proxy\":\"123.234.53.22\",\"- timeout\":50,\"host\":\"hexlet.io\"}";
