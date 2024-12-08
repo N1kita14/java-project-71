@@ -31,11 +31,11 @@ public class App{
     @Option(names = { "-f", "--format" }, defaultValue = "stylish", paramLabel = "format",
             description = "output format [default: ${DEFAULT-VALUE}]")
     private String format;
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
-    }*/
-    public static void main(String[] args) throws JsonProcessingException {
+    }
+    /*public static void main(String[] args) throws JsonProcessingException {
         String jsonLoadRun = fileLoad("C:\\file11.json");
         Map<String, Object> mapJson = Pars.parsJson(jsonLoadRun);
         String jsonLoadRun2 = fileLoad("C:\\file22.json");
@@ -47,5 +47,5 @@ public class App{
         String jsonYamlRun2 = fileLoad("C:\\filepath2.yaml");
         Map<String, Object> mapYaml2 = Pars.parsYaml(jsonYamlRun2);
         System.out.println(Differ.generate(mapYaml, mapYaml2));
-    }
+    }*/
 }

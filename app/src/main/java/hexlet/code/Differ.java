@@ -2,6 +2,9 @@ package hexlet.code;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import hexlet.code.formatters.Json;
+import hexlet.code.formatters.Plain;
+import hexlet.code.formatters.Stylish;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -15,11 +18,18 @@ public class Differ {
     public static String generate(String files1, String files2, String formatName) throws JsonProcessingException {
         String textFile1 = fileLoad(files1);
         String typeFile1 = getFileType(textFile1);
-        Map<String, Object> file1 = Pars.pars(textFile1,typeFile1);
+        Map<String, Object> map1 = Pars.pars(textFile1,typeFile1);
         String textFile2 = fileLoad(files2);
         String typeFile2 = getFileType(textFile2);
-        Map<String, Object> file2 = Pars.pars(textFile2,typeFile2);
-
+        Map<String, Object> map2 = Pars.pars(textFile2,typeFile2);
+        if(formatName.equals("json")){
+            return Stylish.format(map1, map2);
+        }else if(formatName.equals("plain")){
+            return Plain.format(map1, map2);
+        }else if(formatName.equals("stylish")){
+            //return Stylish.
+        }
+        return null;
     }
     public static String fileLoad(String file1){
         try (BufferedReader str = new BufferedReader(new FileReader(file1))){

@@ -1,6 +1,9 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
 import hexlet.code.Differ;
 import hexlet.code.Pars;
+import hexlet.code.formatters.Json;
+import hexlet.code.formatters.Plain;
+import hexlet.code.formatters.Stylish;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -22,16 +25,17 @@ public class JsonTestClass {
                         "  \"host\": \"hexlet.io\"\n" +
                         "}";
         try {
-            String testJson = Differ.generate(Pars.parsJson(testFile1), Pars.parsJson(testFile2));
+            Map<String, Object> testJson1 = Pars.pars(testFile1, "json");
+            Map<String, Object> testJson2 = Pars.pars(testFile2, "json");
             String result = "{\"+ timeout\":20,\"+ verbose\":true,\"- follow\":false,\"- proxy\":\"123.234.53.22\",\"- timeout\":50,\"host\":\"hexlet.io\"}";
-            Assertions.assertEquals(result, testJson);
+            Assertions.assertEquals(result, Stylish.format(testJson1, testJson2));
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
     }
     @Test
     void testFileYaml(){
-        String testFile1Yaml = "host: hexlet.io" +
+        String testFile1Yaml = "host: hexlet.io\n" +
                 "timeout: 50\n" +
                 "proxy: 123.234.53.22\n" +
                 "follow: false";
@@ -39,9 +43,10 @@ public class JsonTestClass {
                 "verbose: true\n" +
                 "host: hexlet.io\n";
         try {
-            String testYaml = Differ.generate(Pars.parsYaml(testFile1Yaml), Pars.parsYaml(testFile2Yaml));
+            Map<String, Object> testYaml1 = Pars.pars(testFile1Yaml, "yaml");
+            Map<String, Object> testYaml2 = Pars.pars(testFile2Yaml, "yaml");
             String resultYaml = "{\"+ timeout\":20,\"+ verbose\":true,\"- follow\":false,\"- proxy\":\"123.234.53.22\",\"- timeout\":50,\"host\":\"hexlet.io\"}";
-            Assertions.assertEquals(resultYaml, testYaml);
+            Assertions.assertEquals(resultYaml, Stylish.format(testYaml1, testYaml2));
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
