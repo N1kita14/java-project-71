@@ -23,11 +23,11 @@ public class Differ {
         String typeFile2 = getFileType(textFile2);
         Map<String, Object> map2 = Pars.pars(textFile2,typeFile2);
         if(formatName.equals("json")){
-            return Stylish.format(map1, map2);
+            return Json.format(map1, map2);
         }else if(formatName.equals("plain")){
             return Plain.format(map1, map2);
         }else if(formatName.equals("stylish")){
-            //return Stylish.
+            return Stylish.format(map1, map2);
         }
         return null;
     }

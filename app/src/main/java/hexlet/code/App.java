@@ -11,7 +11,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.CallableStatement;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 
 @ Command(name = "gendiff",
@@ -21,20 +23,29 @@ import java.util.Map;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.*/
-public class App{
-    @Parameters(paramLabel = "filepath1", description = "path to first file")
+public class App implements Callable<Integer> {
+
+    @Parameters(paramLabel = "file1", description = "path to first file")
     private String filePath1;
 
-    @Parameters(paramLabel = "filepath2", description = "path to second file")
+    @Parameters(paramLabel = "file2", description = "path to second file")
     private String filePath2;
 
-    @Option(names = { "-f", "--format" }, defaultValue = "stylish", paramLabel = "format",
+    @Option(names = {"-f", "--format"}, defaultValue = "stylish", paramLabel = "format",
             description = "output format [default: ${DEFAULT-VALUE}]")
     private String format;
+
     public static void main(String[] args) {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
     }
+
+    @Override
+    public Integer call() throws Exception {
+        System.out.println(Differ.generate(filePath1, filePath2, format));
+        return 0;
+    }
+}
     /*public static void main(String[] args) throws JsonProcessingException {
         String jsonLoadRun = fileLoad("C:\\file11.json");
         Map<String, Object> mapJson = Pars.parsJson(jsonLoadRun);
@@ -48,4 +59,3 @@ public class App{
         Map<String, Object> mapYaml2 = Pars.parsYaml(jsonYamlRun2);
         System.out.println(Differ.generate(mapYaml, mapYaml2));
     }*/
-}
