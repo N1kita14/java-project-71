@@ -2,7 +2,7 @@ plugins {
     application
     checkstyle
     jacoco
-    id("io.freefair.lombok") version "8.4"
+    id("io.freefair.lombok") version "8.6"
 }
 application { mainClass.set("hexlet.code.App") }
 
