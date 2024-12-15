@@ -13,20 +13,20 @@ public class Plain {
         for(String key: diffFile2.keySet()){
             if(diffFile1.containsKey(key)){
                 if(diffFile1.get(key) != null && diffFile2.get(key) != null && diffFile1.get(key).equals(diffFile2.get(key))){
-                    file12.add("Property" + key + "was updated" + "\\." + "From" + diffFile1.get(key) + "to" + diffFile2.get(key));
+                    file12.add("Property " + key + " was updated" + ". " + "From " + diffFile1.get(key) + " to " + diffFile2.get(key));
                 }else{
-                    file12.add("Property '" + key + "' was added with value: [" + diffFile2.get(key) + "].");
+                    file12.add("Property " + key + " was added with value: [" + diffFile2.get(key) + "].");
                 }
             }else{
-                file12.add("Property" + key + "was updated" + "\\." + "From" + diffFile1.get(key) + "to" + diffFile2.get(key));
+                file12.add("Property " + key + " was updated" + ". " + "From " + diffFile1.get(key) + " to "  + diffFile2.get(key));
             }
         }
         for(String key: diffFile1.keySet()){
             if(!diffFile2.containsKey(key)){
-                file12.add("Property '" + key + "' was removed.");
+                file12.add("Property " + key + " was removed.");
             }
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(file12);
+        return objectMapper.writeValueAsString(file12).replace(",", "\n");
     }
 }

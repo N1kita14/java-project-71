@@ -27,6 +27,6 @@ public class Stylish {
             }
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(file12);
+        return objectMapper.writeValueAsString(file12).replace(",", "\n");
     }
 }
