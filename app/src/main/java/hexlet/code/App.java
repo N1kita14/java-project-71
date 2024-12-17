@@ -1,18 +1,10 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.sql.CallableStatement;
-import java.util.Map;
 import java.util.concurrent.Callable;
 
 
@@ -33,7 +25,7 @@ public class App implements Callable<Integer> {
 
     @Option(names = {"-f", "--format"}, defaultValue = "stylish", paramLabel = "format",
             description = "output format [default: ${DEFAULT-VALUE}]")
-    private String format;
+    private String format = "stylish";
 
     public static void main(String[] args) {
         int exitCode = new CommandLine(new App()).execute(args);
