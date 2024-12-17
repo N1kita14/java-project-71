@@ -68,7 +68,7 @@ goto fail
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\app-1.0-SNAPSHOT.jar;%APP_HOME%\lib\picocli-4.7.6.jar;%APP_HOME%\lib\jackson-annotations-2.18.1.jar;%APP_HOME%\lib\jackson-core-2.18.1.jar;%APP_HOME%\lib\jackson-databind-2.18.1.jar
+set CLASSPATH=%APP_HOME%\lib\app-1.0-SNAPSHOT.jar;%APP_HOME%\lib\jackson-databind-2.14.0-rc1.jar;%APP_HOME%\lib\jackson-core-2.14.0-rc1.jar;%APP_HOME%\lib\jackson-annotations-2.14.0-rc1.jar;%APP_HOME%\lib\jackson-dataformat-yaml-2.14.0-rc1.jar;%APP_HOME%\lib\picocli-4.7.6.jar;%APP_HOME%\lib\snakeyaml-1.32.jar
 
 
 @rem Execute app
