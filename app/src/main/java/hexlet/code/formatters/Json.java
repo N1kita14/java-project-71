@@ -6,11 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.*;
 
 public class Json {
-    public static String format(Map<String, Object> diffFile1, Map<String, Object> diffFile2) throws JsonProcessingException {
-        List<Map<String, Object>> list = new ArrayList<>();
-        list.add(diffFile1);
-        list.add(diffFile2);
+    public static String format(Map<String, Object> diffFile1) throws JsonProcessingException {
+        //List<Map<String, Object>> list = new ArrayList<>();
+        //list.add(diffFile1);
+        //list.add(diffFile2);
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(list);
+        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(diffFile1);
     }
 }
