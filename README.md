@@ -13,4 +13,4 @@
 ![img_5.png](img_5.png)
 
 #### Вывод результата сравнения в формате 'Json'
-![img_1.png](img_1.png)
+![img.png](img.png)
