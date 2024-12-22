@@ -29,7 +29,7 @@ public class JsonTestClass {
             Map<String, Object> testJson2 = Pars.pars(testFile2, "json");
             String result = "{\"+ timeout\":20,\"+ verbose\":true,\"- follow\":false,\"- proxy\":\"123.234.53.22\",\"- timeout\":50,\"host\":\"hexlet.io\"}";
             Assertions.assertEquals(result, Stylish.format(testJson1, testJson2));
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -47,7 +47,7 @@ public class JsonTestClass {
             Map<String, Object> testYaml2 = Pars.pars(testFile2Yaml, "yaml");
             String resultYaml = "{\"+ timeout\":20,\"+ verbose\":true,\"- follow\":false,\"- proxy\":\"123.234.53.22\",\"- timeout\":50,\"host\":\"hexlet.io\"}";
             Assertions.assertEquals(resultYaml, Stylish.format(testYaml1, testYaml2));
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

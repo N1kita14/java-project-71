@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 public class Formatter {
-    public static String format(Map<String, Object> diffFile1, Map<String, Object> diffFile2, String styles) throws JsonProcessingException {
+    public static String format(Map<String, Object> diffFile1, Map<String, Object> diffFile2, String styles) throws Exception {
         return switch(styles){
             case "stylish" -> Stylish.format(diffFile1, diffFile2);
             case "json" -> Json.format(diffFile1, diffFile2);

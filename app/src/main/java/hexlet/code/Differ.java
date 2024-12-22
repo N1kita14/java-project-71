@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public class Differ {
-    public static String generate(String files1, String files2, String formatName) throws JsonProcessingException {
+    public static String generate(String files1, String files2, String formatName) throws Exception {
         String textFile1 = fileLoad(files1);
         String typeFile1 = getFileType(files1);
         Map<String, Object> map1 = Pars.pars(textFile1,typeFile1);
@@ -20,7 +20,7 @@ public class Differ {
         return Formatter.format(map1, map2, formatName);
     }
 
-    public static String generate(String files1, String files2) throws JsonProcessingException {
+    public static String generate(String files1, String files2) throws Exception {
         String textFile1 = fileLoad(files1);
         String typeFile1 = getFileType(files1);
         Map<String, Object> map1 = Pars.pars(textFile1,typeFile1);

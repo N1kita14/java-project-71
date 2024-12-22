@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Plain {
-    public static String format(Map<String, Object> diffFile1, Map<String, Object> diffFile2) throws JsonProcessingException {
+    public static String format(Map<String, Object> diffFile1, Map<String, Object> diffFile2) throws Exception {
         ArrayList<String> file12 = new ArrayList<>();
         for(String key: diffFile2.keySet()){
             if(diffFile1.containsKey(key)){

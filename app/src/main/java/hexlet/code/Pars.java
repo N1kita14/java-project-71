@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Pars {
-    public static Map<String, Object> pars(String text, String type) throws JsonProcessingException {
+    public static Map<String, Object> pars(String text, String type) throws Exception {
         if(type.equals("json")){
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String,Object> map = objectMapper.readValue(text, Map.class);
