@@ -31,6 +31,9 @@ public class App implements Callable<Integer> {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
     }
+    //public static void main(String[] args) throws Exception {
+       // Differ.generate("C:\\filepath1.yml", "C:\\filepath2.yml");
+    //}
 
     @Override
     public Integer call() throws Exception {

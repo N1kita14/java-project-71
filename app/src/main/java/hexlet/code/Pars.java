@@ -13,7 +13,7 @@ public class Pars {
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String,Object> map = objectMapper.readValue(text, Map.class);
             return map;
-        } else if (type.equals("yaml")) {
+        } else if (type.equals("yaml") || type.equals("yml")) {
             ObjectMapper objectMapperYaml = new ObjectMapper(new YAMLFactory());
             Map<String, Object> mapYaml = objectMapperYaml.readValue(text, Map.class);
             return mapYaml;
