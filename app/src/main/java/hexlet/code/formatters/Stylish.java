@@ -4,40 +4,30 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Map;
-import java.util.TreeSet;
+import java.util.TreeMap;
 
 public class Stylish {
     public static String format(Map<String, Object> diffFile1, Map<String, Object> diffFile2) throws Exception {
-
-        StringBuilder difference = new StringBuilder();
-
-        TreeSet<String> keys = new TreeSet<>();
-        keys.addAll(diffFile1.keySet());
-        keys.addAll(diffFile2.keySet());
-
-        difference.append("{").append(System.lineSeparator());
-
-        for(String key: keys){
-            if(diffFile1.containsKey(key) && diffFile2.containsKey(key)){
-                if(diffFile1.get(key).equals(diffFile2.get(key))){
-                    difference.append("    ").append(key).append(": ")
-                            .append(diffFile1.get(key)).append(System.lineSeparator());
+        Map<String, Object> file12 = new TreeMap<>();
+        for(String key: diffFile2.keySet()){
+            if(diffFile1.containsKey(key)){
+                if(diffFile1.get(key) != null && diffFile2.get(key) != null && diffFile1.get(key).equals(diffFile2.get(key))){
+                    file12.put(key, diffFile1.get(key));
                 }else{
-                    difference.append("  - ").append(key).append(": ")
-                            .append(diffFile1.get(key)).append(System.lineSeparator());
-                    difference.append("  + ").append(key).append(": ")
-                            .append(diffFile2.get(key)).append(System.lineSeparator());
+                    file12.put("- " + key, diffFile1.get(key));
+                    file12.put("+ " + key, diffFile2.get(key));
                 }
-            }else if (diffFile1.containsKey(key) && !diffFile2.containsKey(key)){
-                difference.append("  - ").append(key).append(": ")
-                        .append(diffFile1.get(key)).append(System.lineSeparator());
-            } else if (!diffFile1.containsKey(key) && diffFile2.containsKey(key)) {
-                difference.append("  + ").append(key).append(": ")
-                        .append(diffFile2.get(key)).append(System.lineSeparator());
+            }else{
+                file12.put("+ " + key, diffFile2.get(key));
             }
         }
-        difference.append("}");
-
-        return difference.toString();
+        for(String key: diffFile1.keySet()){
+            if(!diffFile2.containsKey(key)){
+                file12.put("- " + key, diffFile1.get(key));
+            }
+        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(file12)
+                .replace(",", "\n");
     }
 }
