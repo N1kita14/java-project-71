@@ -6,32 +6,54 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeSet;
+import java.util.Set;
 
 public class Plain {
     public static String format(Map<String, Object> diffFile1, Map<String, Object> diffFile2) throws Exception {
 
         StringBuilder difference = new StringBuilder();
 
-        TreeSet<String> keys = new TreeSet<>();
-        keys.addAll(diffFile1.keySet());
+        Set<String> keys = new TreeSet<>(diffFile1.keySet());
         keys.addAll(diffFile2.keySet());
 
-        for(String key: keys){
-            if(diffFile1.containsKey(key) && diffFile2.containsKey(key)){
-                if(diffFile1.get(key) != null && diffFile2.get(key) != null && diffFile1.get(key).equals(diffFile2.get(key))){
-                    difference.append("Property ").append("'").append(key).append("'").append(" was update").append(". ").append("From ").append(diffFile1.get(key)).append(" to ").append(diffFile2.get(key)).append(System.lineSeparator());
-                }else{
-                    difference.append("Property ").append("'").append(key).append("'").append(" was added with value: [").append(diffFile2.get(key)).append("].").append(System.lineSeparator());
+        for (String key : keys) {
+            if (diffFile1.containsKey(key) && diffFile2.containsKey(key)) {
+
+                String value1 = getComplexValue(diffFile1.get(key));
+                String value2 = getComplexValue(diffFile2.get(key));
+
+                if (!value1.equals(value2)) {
+                    difference.append("Property '")
+                            .append(key)
+                            .append("' was updated. ")
+                            .append("From ")
+                            .append(value1)
+                            .append(" to ")
+                            .append(value2)
+                            .append(System.lineSeparator());
                 }
-            }else{
-                difference.append("Property ").append("'").append(key).append("'").append(" was update").append(". ").append("From ").append(diffFile1.get(key)).append(" to ").append(diffFile2.get(key)).append(System.lineSeparator());
+            } else if (diffFile1.containsKey(key)) {
+                difference.append("Property '")
+                        .append(key)
+                        .append("' was removed.")
+                        .append(System.lineSeparator());
+            } else {
+                difference.append("Property '")
+                        .append(key)
+                        .append("' was added with value: [")
+                        .append(getComplexValue(diffFile2.get(key)))
+                        .append("].")
+                        .append(System.lineSeparator());
             }
         }
-        for(String key: diffFile1.keySet()){
-            if(!diffFile2.containsKey(key)){
-                difference.append("Property ").append("'").append(key).append("'").append(" was removed.").append(System.lineSeparator());
-            }
-        }
+
         return difference.toString();
+    }
+
+    private static String getComplexValue(Object obj) {
+        if (obj instanceof Object[]) {
+            return "[complex value]";
+        }
+        return String.valueOf(obj);
     }
 }
