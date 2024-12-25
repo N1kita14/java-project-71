@@ -1,12 +1,8 @@
 package hexlet.code.formatters;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.TreeSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Plain {
     public static String format(Map<String, Object> diffFile1, Map<String, Object> diffFile2) throws Exception {
@@ -27,9 +23,9 @@ public class Plain {
                             .append(key)
                             .append("' was updated. ")
                             .append("From ")
-                            .append(value1)
+                            .append(formatValue(value1))
                             .append(" to ")
-                            .append(value2)
+                            .append(formatValue(value2))
                             .append(System.lineSeparator());
                 }
             } else if (diffFile1.containsKey(key)) {
@@ -40,9 +36,9 @@ public class Plain {
             } else {
                 difference.append("Property '")
                         .append(key)
-                        .append("' was added with value: [")
-                        .append(getComplexValue(diffFile2.get(key)))
-                        .append("].")
+                        .append("' was added with value: ")
+                        .append(formatValue(getComplexValue(diffFile2.get(key))))
+                        .append('.')
                         .append(System.lineSeparator());
             }
         }
@@ -55,5 +51,20 @@ public class Plain {
             return "[complex value]";
         }
         return String.valueOf(obj);
+    }
+
+    private static String formatValue(String value) {
+        if ("[complex value]".equals(value)) {
+            return value;
+        }
+        if (value == null) {
+            return "null";
+        }
+        try {
+            Integer.parseInt(value);
+            return value;
+        } catch (NumberFormatException e) {
+            return "'" + value + "'";
+        }
     }
 }
