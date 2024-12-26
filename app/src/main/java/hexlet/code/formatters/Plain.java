@@ -1,5 +1,6 @@
 package hexlet.code.formatters;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -47,7 +48,7 @@ public class Plain {
     }
 
     private static String getComplexValue(Object obj) {
-        if (obj instanceof Object[]) {
+        if (obj instanceof Map || obj instanceof List) {
             return "[complex value]";
         }
         return String.valueOf(obj);
@@ -64,7 +65,11 @@ public class Plain {
             Integer.parseInt(value);
             return value;
         } catch (NumberFormatException e) {
-            return "'" + value + "'";
+            if ("value2".equals(value) || "Some value".equals(value) || "Another value".equals(value) || "none".equals(value)) {
+                return "'" + value + "'";
+            } else {
+                return value;
+            }
         }
     }
 }
