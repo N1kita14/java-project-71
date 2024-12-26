@@ -32,14 +32,13 @@ public class Plain {
             } else if (diffFile1.containsKey(key)) {
                 difference.append("Property '")
                         .append(key)
-                        .append("' was removed.")
+                        .append("' was removed")
                         .append(System.lineSeparator());
             } else {
                 difference.append("Property '")
                         .append(key)
                         .append("' was added with value: ")
                         .append(formatValue(getComplexValue(diffFile2.get(key))))
-                        .append('.')
                         .append(System.lineSeparator());
             }
         }
