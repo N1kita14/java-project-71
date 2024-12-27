@@ -27,19 +27,19 @@ public class Plain {
                             .append(formatValue(value1))
                             .append(" to ")
                             .append(formatValue(value2))
-                            .append(System.lineSeparator());
+                            .append("\r\n");
                 }
             } else if (diffFile1.containsKey(key)) {
                 difference.append("Property '")
                         .append(key)
                         .append("' was removed")
-                        .append(System.lineSeparator());
+                        .append("\r\n");
             } else {
                 difference.append("Property '")
                         .append(key)
                         .append("' was added with value: ")
                         .append(formatValue(getComplexValue(diffFile2.get(key))))
-                        .append(System.lineSeparator());
+                        .append("\r\n");
             }
         }
 
