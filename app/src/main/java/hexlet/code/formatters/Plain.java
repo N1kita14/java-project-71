@@ -20,26 +20,12 @@ public class Plain {
                 String value2 = getComplexValue(diffFile2.get(key));
 
                 if (!value1.equals(value2)) {
-                    difference.append("Property '")
-                            .append(key)
-                            .append("' was updated. ")
-                            .append("From ")
-                            .append(formatValue(value1))
-                            .append(" to ")
-                            .append(formatValue(value2))
-                            .append("\r\n");
+                    difference.append("Property '").append(key).append("' was updated. ").append("From ").append(formatValue(value1)).append(" to ").append(formatValue(value2)).append(System.lineSeparator());
                 }
             } else if (diffFile1.containsKey(key)) {
-                difference.append("Property '")
-                        .append(key)
-                        .append("' was removed")
-                        .append("\r\n");
+                difference.append("Property '").append(key).append("' was removed").append(System.lineSeparator());
             } else {
-                difference.append("Property '")
-                        .append(key)
-                        .append("' was added with value: ")
-                        .append(formatValue(getComplexValue(diffFile2.get(key))))
-                        .append("\r\n");
+                difference.append("Property '").append(key).append("' was added with value: ").append(formatValue(getComplexValue(diffFile2.get(key)))).append(System.lineSeparator());
             }
         }
 
@@ -72,4 +58,3 @@ public class Plain {
         }
     }
 }
-//dd
