@@ -28,15 +28,15 @@ public class Plain {
                             .append(formatValue(value1))
                             .append(" to ")
                             .append(formatValue(value2));
-                            if(keys.size() > lastKeys) {
-                                difference.append(System.lineSeparator());
-                            }
+                    if (keys.size() > lastKeys) {
+                        difference.append(System.lineSeparator());
+                    }
                 }
             } else if (diffFile1.containsKey(key)) {
                 difference.append("Property '")
                         .append(key)
                         .append("' was removed");
-                if(keys.size() > lastKeys) {
+                if (keys.size() > lastKeys) {
                     difference.append(System.lineSeparator());
                 }
             } else {
@@ -44,7 +44,7 @@ public class Plain {
                         .append(key)
                         .append("' was added with value: ")
                         .append(formatValue(getComplexValue(diffFile2.get(key))));
-                if(keys.size() > lastKeys) {
+                if (keys.size() > lastKeys) {
                     difference.append(System.lineSeparator());
                 }
             }

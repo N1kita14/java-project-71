@@ -1,8 +1,5 @@
 package hexlet.code.formatters;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.util.Map;
 import java.util.TreeSet;
 
@@ -17,19 +14,19 @@ public class Stylish {
 
         difference.append("{").append(System.lineSeparator());
 
-        for(String key: keys){
-            if(diffFile1.containsKey(key) && diffFile2.containsKey(key)){
-                if(diffFile1.get(key) != null && diffFile2.get(key) != null &&
-                        diffFile1.get(key).equals(diffFile2.get(key))){
+        for (String key : keys) {
+            if (diffFile1.containsKey(key) && diffFile2.containsKey(key)) {
+                if (diffFile1.get(key) != null && diffFile2.get(key) != null &&
+                        diffFile1.get(key).equals(diffFile2.get(key))) {
                     difference.append("    ").append(key).append(": ")
                             .append(diffFile1.get(key)).append(System.lineSeparator());
-                }else{
+                } else {
                     difference.append("  - ").append(key).append(": ")
                             .append(diffFile1.get(key)).append(System.lineSeparator());
                     difference.append("  + ").append(key).append(": ")
                             .append(diffFile2.get(key)).append(System.lineSeparator());
                 }
-            }else if(diffFile1.containsKey(key) && !diffFile2.containsKey(key)){
+            } else if (diffFile1.containsKey(key) && !diffFile2.containsKey(key)) {
                 difference.append("  - ").append(key).append(": ")
                         .append(diffFile1.get(key)).append(System.lineSeparator());
             } else if (!diffFile1.containsKey(key) && diffFile2.containsKey(key)) {

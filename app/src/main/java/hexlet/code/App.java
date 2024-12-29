@@ -8,10 +8,10 @@ import picocli.CommandLine.Parameters;
 import java.util.concurrent.Callable;
 
 
-@ Command(name = "gendiff",
+@Command(name = "gendiff",
         mixinStandardHelpOptions = true,
         version = "gendiff 1.0",
-                description = "Compares two configuration files and shows a difference.")
+        description = "Compares two configuration files and shows a difference.")
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.*/
@@ -31,9 +31,6 @@ public class App implements Callable<Integer> {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
     }
-    //public static void main(String[] args) throws Exception {
-       // Differ.generate("C:\\filepath1.yml", "C:\\filepath2.yml");
-    //}
 
     @Override
     public Integer call() throws Exception {
