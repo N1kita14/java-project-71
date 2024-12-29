@@ -20,7 +20,7 @@ public class Plain {
                 String value1 = getComplexValue(diffFile1.get(key));
                 String value2 = getComplexValue(diffFile2.get(key));
 
-                if (!value1.equals(value2)) {
+                if (!value1.equals(value2) || !diffFile1.get(key).equals(diffFile2.get(key))) {
                     difference.append("Property '")
                             .append(key)
                             .append("' was updated. ")
