@@ -12,6 +12,7 @@ public class Plain {
 
         Set<String> keys = new TreeSet<>(diffFile1.keySet());
         keys.addAll(diffFile2.keySet());
+        int lastKeys = 1;
 
         for (String key : keys) {
             if (diffFile1.containsKey(key) && diffFile2.containsKey(key)) {
@@ -20,13 +21,34 @@ public class Plain {
                 String value2 = getComplexValue(diffFile2.get(key));
 
                 if (!value1.equals(value2)) {
-                    difference.append("Property '").append(key).append("' was updated. ").append("From ").append(formatValue(value1)).append(" to ").append(formatValue(value2)).append(System.lineSeparator());
+                    difference.append("Property '")
+                            .append(key)
+                            .append("' was updated. ")
+                            .append("From ")
+                            .append(formatValue(value1))
+                            .append(" to ")
+                            .append(formatValue(value2));
+                            if(keys.size() > lastKeys) {
+                                difference.append(System.lineSeparator());
+                            }
                 }
             } else if (diffFile1.containsKey(key)) {
-                difference.append("Property '").append(key).append("' was removed").append(System.lineSeparator());
+                difference.append("Property '")
+                        .append(key)
+                        .append("' was removed");
+                if(keys.size() > lastKeys) {
+                    difference.append(System.lineSeparator());
+                }
             } else {
-                difference.append("Property '").append(key).append("' was added with value: ").append(formatValue(getComplexValue(diffFile2.get(key)))).append(System.lineSeparator());
+                difference.append("Property '")
+                        .append(key)
+                        .append("' was added with value: ")
+                        .append(formatValue(getComplexValue(diffFile2.get(key))));
+                if(keys.size() > lastKeys) {
+                    difference.append(System.lineSeparator());
+                }
             }
+            lastKeys++;
         }
 
         return difference.toString();
