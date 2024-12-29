@@ -15,7 +15,7 @@ import java.util.concurrent.Callable;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.*/
-public class App implements Callable<Integer> {
+public final class App implements Callable<Integer> {
 
     @Parameters(paramLabel = "file1", description = "path to first file")
     private String filePath1;

@@ -16,8 +16,8 @@ public class Stylish {
 
         for (String key : keys) {
             if (diffFile1.containsKey(key) && diffFile2.containsKey(key)) {
-                if (diffFile1.get(key) != null && diffFile2.get(key) != null &&
-                        diffFile1.get(key).equals(diffFile2.get(key))) {
+                if (diffFile1.get(key) != null && diffFile2.get(key) != null
+                        && diffFile1.get(key).equals(diffFile2.get(key))) {
                     difference.append("    ").append(key).append(": ")
                             .append(diffFile1.get(key)).append(System.lineSeparator());
                 } else {

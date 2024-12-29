@@ -1,8 +1,5 @@
-import com.fasterxml.jackson.core.JsonProcessingException;
-import hexlet.code.Differ;
+
 import hexlet.code.Pars;
-import hexlet.code.formatters.Json;
-import hexlet.code.formatters.Plain;
 import hexlet.code.formatters.Stylish;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,7 +9,7 @@ import java.util.Map;
 public class JsonTestClass {
 
     @Test
-    void testDiffJson(){
+    void testDiffJson() {
         String testFile1 = "{\n" +
                 "  \"host\": \"hexlet.io\",\n" +
                 "  \"timeout\": 50,\n" +
@@ -20,10 +17,10 @@ public class JsonTestClass {
                 "  \"follow\": false\n" +
                 "}";
         String testFile2 = "{\n" +
-                        "  \"timeout\": 20,\n" +
-                        "  \"verbose\": true,\n" +
-                        "  \"host\": \"hexlet.io\"\n" +
-                        "}";
+                "  \"timeout\": 20,\n" +
+                "  \"verbose\": true,\n" +
+                "  \"host\": \"hexlet.io\"\n" +
+                "}";
         try {
             Map<String, Object> testJson1 = Pars.pars(testFile1, "json");
             Map<String, Object> testJson2 = Pars.pars(testFile2, "json");
@@ -33,15 +30,16 @@ public class JsonTestClass {
             throw new RuntimeException(e);
         }
     }
+
     @Test
-    void testFileYaml(){
-        String testFile1Yaml = "host: hexlet.io\n" +
-                "timeout: 50\n" +
-                "proxy: 123.234.53.22\n" +
-                "follow: false";
-        String testFile2Yaml = "timeout: 20\n" +
-                "verbose: true\n" +
-                "host: hexlet.io\n";
+    void testFileYaml() {
+        String testFile1Yaml = "host: hexlet.io\n"
+                + "timeout: 50\n"
+                + "proxy: 123.234.53.22\n"
+                + "follow: false";
+        String testFile2Yaml = "timeout: 20\n"
+                + "verbose: true\n"
+                + "host: hexlet.io\n";
         try {
             Map<String, Object> testYaml1 = Pars.pars(testFile1Yaml, "yaml");
             Map<String, Object> testYaml2 = Pars.pars(testFile2Yaml, "yaml");

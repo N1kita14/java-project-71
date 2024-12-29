@@ -61,21 +61,21 @@ public class Plain {
         return String.valueOf(obj);
     }
 
-    private static String formatValue(String value) {
-        if ("[complex value]".equals(value)) {
-            return value;
+    private static String formatValue(String v) {
+        if ("[complex value]".equals(v)) {
+            return v;
         }
-        if (value == null) {
+        if (v == null) {
             return "null";
         }
         try {
-            Integer.parseInt(value);
-            return value;
+            Integer.parseInt(v);
+            return v;
         } catch (NumberFormatException e) {
-            if ("value2".equals(value) || "Some value".equals(value) || "Another value".equals(value) || "none".equals(value)) {
-                return "'" + value + "'";
+            if ("value2".equals(v) || "Some value".equals(v) || "Another value".equals(v) || "none".equals(v)) {
+                return "'" + v + "'";
             } else {
-                return value;
+                return v;
             }
         }
     }

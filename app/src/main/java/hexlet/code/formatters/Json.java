@@ -2,7 +2,10 @@ package hexlet.code.formatters;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.*;
+import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
+
 
 public class Json {
     public static String format(Map<String, Object> diffFile1, Map<String, Object> diffFile2) throws Exception {

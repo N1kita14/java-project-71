@@ -49,4 +49,3 @@ public class Differ {
         return path[path.length - 1];
     }
 }
-
