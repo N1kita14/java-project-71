@@ -23,7 +23,7 @@ public class Tree {
                     mapsKeys.put("value1", map1.get(key));
                     mapsKeys.put("value2", map2.get(key));
                 } else {
-                    mapsKeys.put("status","changed");
+                    mapsKeys.put("status", "changed");
                     mapsKeys.put("value1", map1.get(key));
                     mapsKeys.put("value2", map2.get(key));
                 }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Plain {
-    public static String format(List<Map<String,Object>> diffFile) throws Exception {
+    public static String format(List<Map<String, Object>> diffFile) throws Exception {
 
         StringBuilder difference = new StringBuilder();
 
@@ -33,7 +33,7 @@ public class Plain {
                 if (diffFile.size() > lastKeys) {
                     difference.append(System.lineSeparator());
                 }
-            } else if(map.get("status").equals("added")){
+            } else if (map.get("status").equals("added")) {
                 difference.append("Property '")
                         .append(map.get("key"))
                         .append("' was added with value: ")
