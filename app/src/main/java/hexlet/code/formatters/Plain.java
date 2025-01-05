@@ -2,49 +2,43 @@ package hexlet.code.formatters;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class Plain {
-    public static String format(Map<String, Object> diffFile1, Map<String, Object> diffFile2) throws Exception {
+    public static String format(List<Map<String,Object>> diffFile) throws Exception {
 
         StringBuilder difference = new StringBuilder();
 
-        Set<String> keys = new TreeSet<>(diffFile1.keySet());
-        keys.addAll(diffFile2.keySet());
         int lastKeys = 1;
 
-        for (String key : keys) {
-            if (diffFile1.containsKey(key) && diffFile2.containsKey(key)) {
+        for (Map<String, Object> map : diffFile) {
 
-                String value1 = getComplexValue(diffFile1.get(key));
-                String value2 = getComplexValue(diffFile2.get(key));
+            String value1 = getComplexValue(map.get("value1"));
+            String value2 = getComplexValue(map.get("value2"));
 
-                if (!value1.equals(value2) || !diffFile1.get(key).equals(diffFile2.get(key))) {
-                    difference.append("Property '")
-                            .append(key)
-                            .append("' was updated. ")
-                            .append("From ")
-                            .append(formatValue(value1))
-                            .append(" to ")
-                            .append(formatValue(value2));
-                    if (keys.size() > lastKeys) {
-                        difference.append(System.lineSeparator());
-                    }
-                }
-            } else if (diffFile1.containsKey(key)) {
+            if (map.get("status").equals("changed")) {
                 difference.append("Property '")
-                        .append(key)
-                        .append("' was removed");
-                if (keys.size() > lastKeys) {
+                        .append(map.get("key"))
+                        .append("' was updated. ")
+                        .append("From ")
+                        .append(formatValue(value1))
+                        .append(" to ")
+                        .append(formatValue(value2));
+                if (diffFile.size() > lastKeys) {
                     difference.append(System.lineSeparator());
                 }
-            } else {
+            } else if (map.get("status").equals("removed")) {
                 difference.append("Property '")
-                        .append(key)
+                        .append(map.get("key"))
+                        .append("' was removed");
+                if (diffFile.size() > lastKeys) {
+                    difference.append(System.lineSeparator());
+                }
+            } else if(map.get("status").equals("added")){
+                difference.append("Property '")
+                        .append(map.get("key"))
                         .append("' was added with value: ")
-                        .append(formatValue(getComplexValue(diffFile2.get(key))));
-                if (keys.size() > lastKeys) {
+                        .append(formatValue(value2));
+                if (diffFile.size() > lastKeys) {
                     difference.append(System.lineSeparator());
                 }
             }

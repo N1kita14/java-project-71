@@ -1,37 +1,30 @@
 package hexlet.code.formatters;
 
+import java.util.List;
 import java.util.Map;
-import java.util.TreeSet;
 
 public class Stylish {
-    public static String format(Map<String, Object> diffFile1, Map<String, Object> diffFile2) throws Exception {
+    public static String format(List<Map<String, Object>> diffFile) throws Exception {
 
         StringBuilder difference = new StringBuilder();
 
-        TreeSet<String> keys = new TreeSet<>();
-        keys.addAll(diffFile1.keySet());
-        keys.addAll(diffFile2.keySet());
-
         difference.append("{").append(System.lineSeparator());
 
-        for (String key : keys) {
-            if (diffFile1.containsKey(key) && diffFile2.containsKey(key)) {
-                if (diffFile1.get(key) != null && diffFile2.get(key) != null
-                        && diffFile1.get(key).equals(diffFile2.get(key))) {
-                    difference.append("    ").append(key).append(": ")
-                            .append(diffFile1.get(key)).append(System.lineSeparator());
-                } else {
-                    difference.append("  - ").append(key).append(": ")
-                            .append(diffFile1.get(key)).append(System.lineSeparator());
-                    difference.append("  + ").append(key).append(": ")
-                            .append(diffFile2.get(key)).append(System.lineSeparator());
-                }
-            } else if (diffFile1.containsKey(key) && !diffFile2.containsKey(key)) {
-                difference.append("  - ").append(key).append(": ")
-                        .append(diffFile1.get(key)).append(System.lineSeparator());
-            } else if (!diffFile1.containsKey(key) && diffFile2.containsKey(key)) {
-                difference.append("  + ").append(key).append(": ")
-                        .append(diffFile2.get(key)).append(System.lineSeparator());
+        for (Map<String, Object> map : diffFile) {
+            if (map.get("status").equals("unchanged")) {
+                difference.append("    ").append(map.get("key")).append(": ")
+                        .append(map.get("value2")).append(System.lineSeparator());
+            } else if (map.get("status").equals("changed")) {
+                difference.append("  - ").append(map.get("key")).append(": ")
+                        .append(map.get("value1")).append(System.lineSeparator());
+                difference.append("  + ").append(map.get("key")).append(": ")
+                        .append(map.get("value2")).append(System.lineSeparator());
+            } else if (map.get("status").equals("removed")) {
+                difference.append("  - ").append(map.get("key")).append(": ")
+                        .append(map.get("value1")).append(System.lineSeparator());
+            } else if (map.get("status").equals("added")) {
+                difference.append("  + ").append(map.get("key")).append(": ")
+                        .append(map.get("value2")).append(System.lineSeparator());
             }
         }
         difference.append("}");
