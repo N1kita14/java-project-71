@@ -1,6 +1,10 @@
 package hexlet.code;
 
-import java.util.*;
+import java.util.Map;
+import java.util.TreeSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Tree {
     public static List<Map<String, Object>> gDiff(Map<String, Object> map1, Map<String, Object> map2) throws Exception {
