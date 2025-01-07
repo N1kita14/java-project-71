@@ -28,13 +28,13 @@ public class JsonTestClass {
         String filePath1 = getFixturePath("file1." + format).toString();
         String filePath2 = getFixturePath("file2." + format).toString();
 
-        assertEquals(resultStylish ,Differ.generate(filePath1, filePath2));
+        assertEquals(resultStylish, Differ.generate(filePath1, filePath2));
 
-        assertEquals(resultStylish ,Differ.generate(filePath1, filePath2, "stylish"));
+        assertEquals(resultStylish, Differ.generate(filePath1, filePath2, "stylish"));
 
-        assertEquals(resultPlain ,Differ.generate(filePath1, filePath2, "plain"));
+        assertEquals(resultPlain, Differ.generate(filePath1, filePath2, "plain"));
 
-        assertEquals(resultJson ,Differ.generate(filePath1, filePath2, "json"));
+        assertEquals(resultJson, Differ.generate(filePath1, filePath2, "json"));
 
     }
 
@@ -48,5 +48,4 @@ public class JsonTestClass {
         Path filePath = getFixturePath(fileName);
         return Files.readString(filePath).trim();
     }
-
 }

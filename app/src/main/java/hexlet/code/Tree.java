@@ -3,7 +3,7 @@ package hexlet.code;
 import java.util.*;
 
 public class Tree {
-    public static List<Map<String, Object>> getDiff(Map<String, Object> map1, Map<String, Object> map2) throws Exception {
+    public static List<Map<String, Object>> gDiff(Map<String, Object> map1, Map<String, Object> map2) throws Exception {
 
         TreeSet<String> keys = new TreeSet<>();
         keys.addAll(map1.keySet());
