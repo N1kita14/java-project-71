@@ -19,4 +19,3 @@
 #### Вывод результата сравнения в формате 'Json'
 
 <img alt="img.png" src="img.png"/>
-![image](https://github.com/user-attachments/assets/1ccea822-498f-406f-ab00-b3535b38eda1)
