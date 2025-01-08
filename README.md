@@ -6,16 +6,16 @@
 
 ##### Отображение справки по программе:
 
-![img_2.png](img_2.png)
+<img alt="img_2.png" src="img_2.png"/>
 
 #### Вывод результата сравнения в формате 'Stylish' (формат по умолчанию):
 
-![img_1.png](img_1.png)
+<img alt="img_1.png" src="img_1.png"/>
 
 #### Вывод результата сравнения в формате 'Plain'
 
-![img_4.png](img_4.png)
+<img alt="img_4.png" src="img_4.png"/>
 
 #### Вывод результата сравнения в формате 'Json'
 
-![img.png](img.png)
+<img alt="img.png" src="img.png"/>
