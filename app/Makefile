@@ -1,16 +1,36 @@
-run: clear build run-dist
+.DEFAULT_GOAL := build-run
 
-run-dist:
-	sh ./build/install/app/bin/app
+setup:
+	./gradlew wrapper --gradle-version 8.5
 
-run-dist2:
-	.\\build\\install\\app\\bin\\app
-
-clear:
-	gradlew clean
+clean:
+	./gradlew clean
 
 build:
-	gradlew installDist
+	./gradlew clean build
 
-checkstyle:
-	gradlew checkstyleMain
+install:
+	./gradlew clean install
+
+run-dist:
+	.\\build\\install\\app\\bin\\app
+
+run:
+	./gradlew run
+
+test:
+	./gradlew test
+
+report:
+	./gradlew jacocoTestReport
+
+lint:
+	./gradlew checkstyleMain
+
+check-deps:
+	./gradlew dependencyUpdates -Drevision=release
+
+
+build-run: build run
+
+.PHONY: build
