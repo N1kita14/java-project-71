@@ -20,13 +20,7 @@ public class Differ {
     }
 
     public static String generate(String files1, String files2) throws Exception {
-        String textFile1 = fileLoad(files1);
-        String typeFile1 = getFileType(files1);
-        Map<String, Object> map1 = Pars.pars(textFile1, typeFile1);
-        String textFile2 = fileLoad(files2);
-        String typeFile2 = getFileType(files2);
-        Map<String, Object> map2 = Pars.pars(textFile2, typeFile2);
-        return Formatter.format(map1, map2, "stylish");
+        return generate(files1, files2, "stylish");
     }
 
     public static String fileLoad(String file1) {

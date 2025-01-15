@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Plain {
-    public static String format(List<Map<String, Object>> diffFile) throws Exception {
+    public static String format(List<Map<String, Object>> diffFile) {
 
         StringBuilder difference = new StringBuilder();
 
