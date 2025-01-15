@@ -12,17 +12,17 @@ public class Plain {
 
         for (Map<String, Object> map : diffFile) {
 
-            String value1 = getComplexValue(map.get("value1"));
-            String value2 = getComplexValue(map.get("value2"));
+            String value1 = formatValue(map.get("value1"));
+            String value2 = formatValue(map.get("value2"));
 
             if (map.get("status").equals("changed")) {
                 difference.append("Property '")
                         .append(map.get("key"))
                         .append("' was updated. ")
                         .append("From ")
-                        .append(formatValue(value1))
+                        .append(value1)
                         .append(" to ")
-                        .append(formatValue(value2));
+                        .append(value2);
                 if (diffFile.size() > lastKeys) {
                     difference.append(System.lineSeparator());
                 }
@@ -37,7 +37,7 @@ public class Plain {
                 difference.append("Property '")
                         .append(map.get("key"))
                         .append("' was added with value: ")
-                        .append(formatValue(value2));
+                        .append(value2);
                 if (diffFile.size() > lastKeys) {
                     difference.append(System.lineSeparator());
                 }
@@ -47,30 +47,16 @@ public class Plain {
 
         return difference.toString();
     }
-
-    private static String getComplexValue(Object obj) {
-        if (obj instanceof Map || obj instanceof List) {
-            return "[complex value]";
-        }
-        return String.valueOf(obj);
-    }
-
-    private static String formatValue(String v) {
-        if ("[complex value]".equals(v)) {
-            return v;
-        }
+    private static String formatValue(Object v) {
         if (v == null) {
             return "null";
         }
-        try {
-            Integer.parseInt(v);
-            return v;
-        } catch (NumberFormatException e) {
-            if ("value2".equals(v) || "Some value".equals(v) || "Another value".equals(v) || "none".equals(v)) {
-                return "'" + v + "'";
-            } else {
-                return v;
-            }
+        if (v instanceof String) {
+            return "'" + v + "'";
         }
+        if (v instanceof Map || v instanceof List) {
+            return "[complex value]";
+        }
+        return String.valueOf(v);
     }
 }

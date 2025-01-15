@@ -5,6 +5,7 @@ import hexlet.code.formatters.Formatter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class Differ {
 
     public static String fileLoad(String file1) {
         try {
-            return Files.readString(Paths.get(file1));
+            return Files.readString(Paths.get(file1).toAbsolutePath().normalize());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
