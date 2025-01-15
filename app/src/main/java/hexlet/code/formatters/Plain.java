@@ -47,6 +47,7 @@ public class Plain {
 
         return difference.toString();
     }
+
     private static String formatValue(Object v) {
         if (v == null) {
             return "null";
